@@ -1,7 +1,9 @@
 package com.digitalresumeportfolio.controller;
 
 import com.digitalresumeportfolio.entity.User;
+import com.digitalresumeportfolio.entity.UserProfile;
 import com.digitalresumeportfolio.entity.UserRole;
+import com.digitalresumeportfolio.repository.UserProfileRepository;
 import com.digitalresumeportfolio.repository.UserRepository;
 import com.digitalresumeportfolio.repository.UserRoleRepository;
 import com.digitalresumeportfolio.request.AuthenticationRequest;
@@ -41,6 +43,9 @@ public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    UserProfileRepository userProfileRepository;
+
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ResponseEntity signIn(@RequestBody AuthenticationRequest data) {
         try {
@@ -49,12 +54,19 @@ public class AuthController {
             User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found"));
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
+            boolean userProfileInDatabase = userProfileRepository.findByUser(user).isPresent();
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("role", user.getRoles());
             model.put("token", token);
             model.put("statusCode", "200");
             model.put("statusMessage", "Ok");
+            if (userProfileInDatabase) {
+                UserProfile userProfile = userProfileRepository.findByUser(user).get();
+                model.put("profile", userProfile);
+            } else {
+                model.put("profile", "null");
+            }
             return new ResponseEntity<>(model, HttpStatus.OK);
         } catch (AuthenticationException e) {
             Map<Object, Object> model = new HashMap<>();
@@ -85,6 +97,7 @@ public class AuthController {
             model.put("username", user.getUsername());
             model.put("token", token);
             model.put("role", userRole.getRoles());
+            model.put("profile", "null");
             model.put("statusCode", "200");
             model.put("statusMessage", "Ok");
             return new ResponseEntity<>(model, HttpStatus.OK);

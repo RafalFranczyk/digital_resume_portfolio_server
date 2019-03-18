@@ -1,5 +1,7 @@
 package com.digitalresumeportfolio.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +37,10 @@ public class User implements UserDetails {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserProfile userProfile;
 
     public User() {
     }
