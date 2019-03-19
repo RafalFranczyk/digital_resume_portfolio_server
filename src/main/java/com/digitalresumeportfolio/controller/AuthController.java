@@ -49,7 +49,16 @@ public class AuthController {
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ResponseEntity signIn(@RequestBody AuthenticationRequest data) {
         try {
-            String username = data.getUsername();
+            String usernameOrEmail = data.getUsernameOrEmail();
+            boolean emailInDatabase = userRepository.findByEmail(usernameOrEmail).isPresent();
+            String username;
+            if (emailInDatabase) {
+                User user = userRepository.findByEmail(usernameOrEmail).get();
+                username = user.getUsername();
+            } else {
+                username = usernameOrEmail;
+            }
+
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
             User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found"));
             String token = jwtTokenProvider.createToken(username, user.getRoles());
