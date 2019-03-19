@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
+    static Logger log = Logger.getLogger(AuthController.class.getName());
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -114,16 +116,24 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResponseEntity deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity deleteUser(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AuthenticationRequest authenticationRequest) {
         Map<Object, Object> model = new HashMap<>();
         boolean userInDatabase = this.userRepository.findByUsername(userDetails.getUsername()).isPresent();
         if (userInDatabase) {
-            User user = this.userRepository.findByUsername(userDetails.getUsername()).get();
-            this.userRoleRepository.deleteUserRoleByUserId(user.getId());
-            this.userRepository.deleteUserById(user.getId());
-            model.put("statusCode", "200");
-            model.put("statusMessage", "Ok");
-            return new ResponseEntity<>(model, HttpStatus.OK);
+            try {
+                User user = this.userRepository.findByUsername(userDetails.getUsername()).get();
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), authenticationRequest.getPassword()));
+                this.userRoleRepository.deleteUserRoleByUserId(user.getId());
+                this.userRepository.deleteUserById(user.getId());
+                model.put("statusCode", "200");
+                model.put("statusMessage", "Ok");
+                return new ResponseEntity<>(model, HttpStatus.OK);
+            } catch (AuthenticationException e) {
+                model.put("statusCode", "400");
+                model.put("statusMessage", "Bad Request");
+                model.put("message", "Incorrect password.");
+                return new ResponseEntity<>(model, HttpStatus.BAD_REQUEST);
+            }
         }
 
         model.put("statusCode", "400");
