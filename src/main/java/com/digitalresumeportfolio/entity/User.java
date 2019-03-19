@@ -42,6 +42,11 @@ public class User implements UserDetails {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserProfile userProfile;
 
+    @OneToMany(mappedBy = "user")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Resume> resumes = new ArrayList<>();
+
     public User() {
     }
 

@@ -24,7 +24,7 @@ public interface UserProfileRepository extends CrudRepository<UserProfile, Long>
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE user_profiles SET name = :name, surname = :surname, birth_date = :birthDate," +
             "phone_number = :phoneNumber, place_of_birth = :placeOfBirth, nationality = :nationality," +
-            "city = :city, postal_code = :postalCode, address = :address, country = :country where user_id = :userId ", nativeQuery = true)
+            "city = :city, postal_code = :postalCode, address = :address, country = :country WHERE user_id = :userId ", nativeQuery = true)
     void updateUserDetails(@Param("name") String name, @Param("surname") String surname, @Param("birthDate") Date birthDate,
                            @Param("phoneNumber") String phoneNumber, @Param("placeOfBirth") String placeOfBirth,
                            @Param("nationality") String nationality, @Param("city") String city,
