@@ -23,12 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
-    static Logger log = Logger.getLogger(AuthController.class.getName());
 
     @Autowired
     AuthenticationManager authenticationManager;
