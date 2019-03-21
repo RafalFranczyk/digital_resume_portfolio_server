@@ -4,6 +4,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user_resumes")
@@ -23,6 +25,11 @@ public class Resume {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "resume")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<ResumeWorkExperience> resumeWorkExperiences = new ArrayList<>();
 
     public Resume() {
 
