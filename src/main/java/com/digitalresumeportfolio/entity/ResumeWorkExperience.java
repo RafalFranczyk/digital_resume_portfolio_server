@@ -39,12 +39,13 @@ public class ResumeWorkExperience {
 
     }
 
-    public ResumeWorkExperience(Date startDate, Date endDate, String companyName, String workTitle, String workDescription) {
+    public ResumeWorkExperience(Date startDate, Date endDate, String companyName, String workTitle, String workDescription, Resume resume) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.companyName = companyName;
         this.workTitle = workTitle;
         this.workDescription = workDescription;
+        this.resume = resume;
     }
 
     public Long getId() {
@@ -73,5 +74,25 @@ public class ResumeWorkExperience {
 
     public Resume getResume() {
         return this.resume;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setWorkTitle(String workTitle) {
+        this.workTitle = workTitle;
+    }
+
+    public void setWorkDescription(String workDescription) {
+        this.workDescription = workDescription;
     }
 }

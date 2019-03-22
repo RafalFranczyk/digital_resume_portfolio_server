@@ -28,7 +28,7 @@ public class Resume {
 
     @OneToMany(mappedBy = "resume")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<ResumeWorkExperience> resumeWorkExperiences = new ArrayList<>();
 
     public Resume() {

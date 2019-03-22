@@ -25,8 +25,9 @@ public interface ResumeWorkExperienceRepository extends CrudRepository<ResumeWor
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "UPDATE resume_work_experiences SET start_date = :startDate, end_date = :endDate, company_name = :companyName," +
-            "work_title = :workTitle, work_description = :workDescription", nativeQuery = true)
-    void updateResumeWorkExperienceById(@Param("resumeWorkExperienceId") String resumeWorkExperienceId,
+            "work_title = :workTitle, work_description = :workDescription WHERE id = :resumeWorkExperienceId",
+            nativeQuery = true)
+    void updateResumeWorkExperienceById(@Param("resumeWorkExperienceId") Long resumeWorkExperienceId,
                                         @Param("startDate") Date startDate, @Param("endDate") Date endDate,
                                         @Param("companyName") String companyName, @Param("workTitle") String workTitle,
                                         @Param("workDescription") String workDescription);
