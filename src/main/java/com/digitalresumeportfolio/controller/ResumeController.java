@@ -1,7 +1,7 @@
 package com.digitalresumeportfolio.controller;
 
-import com.digitalresumeportfolio.entity.Resume;
-import com.digitalresumeportfolio.entity.User;
+import com.digitalresumeportfolio.dao.Resume;
+import com.digitalresumeportfolio.dao.User;
 import com.digitalresumeportfolio.repository.ResumeRepository;
 import com.digitalresumeportfolio.repository.UserRepository;
 import com.digitalresumeportfolio.request.ResumeRequest;

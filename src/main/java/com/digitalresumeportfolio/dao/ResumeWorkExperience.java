@@ -1,4 +1,4 @@
-package com.digitalresumeportfolio.entity;
+package com.digitalresumeportfolio.dao;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -76,23 +76,4 @@ public class ResumeWorkExperience {
         return this.resume;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setWorkTitle(String workTitle) {
-        this.workTitle = workTitle;
-    }
-
-    public void setWorkDescription(String workDescription) {
-        this.workDescription = workDescription;
-    }
 }

@@ -1,4 +1,4 @@
-package com.digitalresumeportfolio.entity;
+package com.digitalresumeportfolio.dao;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

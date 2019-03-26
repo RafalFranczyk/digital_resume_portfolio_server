@@ -1,6 +1,6 @@
 package com.digitalresumeportfolio.configuration;
 
-import com.digitalresumeportfolio.entity.User;
+import com.digitalresumeportfolio.dao.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

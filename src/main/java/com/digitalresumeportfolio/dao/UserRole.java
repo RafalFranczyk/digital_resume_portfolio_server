@@ -1,4 +1,4 @@
-package com.digitalresumeportfolio.entity;
+package com.digitalresumeportfolio.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

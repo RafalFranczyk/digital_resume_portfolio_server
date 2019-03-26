@@ -1,8 +1,8 @@
 package com.digitalresumeportfolio.controller;
 
-import com.digitalresumeportfolio.entity.Resume;
-import com.digitalresumeportfolio.entity.ResumeWorkExperience;
-import com.digitalresumeportfolio.entity.User;
+import com.digitalresumeportfolio.dao.Resume;
+import com.digitalresumeportfolio.dao.ResumeWorkExperience;
+import com.digitalresumeportfolio.dao.User;
 import com.digitalresumeportfolio.repository.ResumeRepository;
 import com.digitalresumeportfolio.repository.ResumeWorkExperienceRepository;
 import com.digitalresumeportfolio.repository.UserRepository;
@@ -14,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

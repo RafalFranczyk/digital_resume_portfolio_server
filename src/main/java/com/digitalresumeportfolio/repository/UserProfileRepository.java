@@ -1,7 +1,7 @@
 package com.digitalresumeportfolio.repository;
 
-import com.digitalresumeportfolio.entity.User;
-import com.digitalresumeportfolio.entity.UserProfile;
+import com.digitalresumeportfolio.dao.User;
+import com.digitalresumeportfolio.dao.UserProfile;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
